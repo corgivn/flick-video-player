@@ -14,6 +14,7 @@ class FlickSeekVideoAction extends StatelessWidget {
     this.duration = const Duration(seconds: 10),
     this.seekForward,
     this.seekBackward,
+    this.canSeek = true,
   }) : super(key: key);
 
   /// Widget to be stacked above this action.
@@ -48,6 +49,9 @@ class FlickSeekVideoAction extends StatelessWidget {
   /// Duration by which video will be seek.
   final Duration duration;
 
+  /// If false, [seekForward] and [seekBackward] will not be called.
+  final bool canSeek;
+
   @override
   Widget build(BuildContext context) {
     FlickDisplayManager displayManager =
@@ -65,13 +69,15 @@ class FlickSeekVideoAction extends StatelessWidget {
           Expanded(
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onDoubleTap: () {
-                if (seekBackward != null) {
-                  seekBackward!();
-                } else {
-                  controlManager.seekBackward(duration);
-                }
-              },
+              onDoubleTap: canSeek
+                  ? () {
+                      if (seekBackward != null) {
+                        seekBackward!();
+                      } else {
+                        controlManager.seekBackward(duration);
+                      }
+                    }
+                  : null,
               child: Align(
                 alignment: Alignment.center,
                 child: AnimatedCrossFade(
@@ -94,13 +100,15 @@ class FlickSeekVideoAction extends StatelessWidget {
           Expanded(
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
-              onDoubleTap: () {
-                if (seekForward != null) {
-                  seekForward!();
-                } else {
-                  controlManager.seekForward(duration);
-                }
-              },
+              onDoubleTap: canSeek
+                  ? () {
+                      if (seekForward != null) {
+                        seekForward!();
+                      } else {
+                        controlManager.seekForward(duration);
+                      }
+                    }
+                  : null,
               child: Align(
                 alignment: Alignment.center,
                 child: AnimatedCrossFade(

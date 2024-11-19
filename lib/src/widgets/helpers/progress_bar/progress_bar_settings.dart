@@ -45,6 +45,7 @@ class FlickProgressBarSettings {
     this.getBufferedPaint,
     this.getHandlePaint,
     this.getBackgroundPaint,
+    this.canSeek = true,
   });
 
   /// Color for played area, not applied if [getPlayedPaint] is provided.
@@ -85,4 +86,7 @@ class FlickProgressBarSettings {
 
   /// Radius to curve the ends of the bar.
   final double curveRadius;
+
+  /// If true, user can seek video by tapping on the progress bar.
+  final bool canSeek;
 }

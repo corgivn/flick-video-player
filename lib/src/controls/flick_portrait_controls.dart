@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
+import 'package:flutter/material.dart';
 
 /// Default portrait controls.
 class FlickPortraitControls extends StatelessWidget {
-  const FlickPortraitControls(
-      {Key? key,
-      this.iconSize = 20,
-      this.fontSize = 12,
-      this.progressBarSettings})
-      : super(key: key);
+  const FlickPortraitControls({
+    Key? key,
+    this.iconSize = 20,
+    this.fontSize = 12,
+    this.progressBarSettings,
+    this.canSeek = true,
+  }) : super(key: key);
 
   /// Icon size.
   ///
@@ -20,6 +21,8 @@ class FlickPortraitControls extends StatelessWidget {
   /// This size is used for all the text.
   final double fontSize;
 
+  final bool canSeek;
+
   /// [FlickProgressBarSettings] settings.
   final FlickProgressBarSettings? progressBarSettings;
 
@@ -30,6 +33,7 @@ class FlickPortraitControls extends StatelessWidget {
         Positioned.fill(
           child: FlickShowControlsAction(
             child: FlickSeekVideoAction(
+              canSeek: canSeek,
               child: Center(
                 child: FlickVideoBuffer(
                   child: FlickAutoHideChild(
